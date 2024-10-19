@@ -13,7 +13,7 @@ class _LoginPageState extends State<LoginPage> {
   String _registeredUsername = '';
   String _registeredPassword = '';
 
-  // Error message for validation
+  // Error message
   String? _usernameError;
   String? _passwordError;
 
@@ -29,12 +29,12 @@ class _LoginPageState extends State<LoginPage> {
 
   void _login() {
     setState(() {
-      // Reset error messages
+      //error messages
       _usernameError = null;
       _passwordError = null;
     });
 
-    // Validate username and password
+    // Validasi username and password
     if (_usernameController.text.isEmpty) {
       setState(() {
         _usernameError = "Please enter a username.";

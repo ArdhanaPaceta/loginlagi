@@ -9,36 +9,32 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController(); // Added Email Controller
+  final TextEditingController _emailController = TextEditingController(); 
   bool _obscurePassword = true;
 
   void _register() {
-    // Validate email
+    // Validasi email
     String email = _emailController.text;
     if (email.isEmpty || !RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(email)) {
       _showErrorDialog("Please enter a valid email address");
       return;
     }
 
-    // Validate username
     if (_usernameController.text.isEmpty) {
       _showErrorDialog("Username cannot be empty");
       return;
     }
 
-    // Validate password
     if (_passwordController.text.isEmpty) {
       _showErrorDialog("Password cannot be empty");
       return;
     }
 
-    // Validate confirm password
     if (_confirmPasswordController.text.isEmpty) {
       _showErrorDialog("Please confirm your password");
       return;
     }
 
-    // Check if passwords match
     if (_passwordController.text != _confirmPasswordController.text) {
       _showErrorDialog("Passwords do not match");
       return;

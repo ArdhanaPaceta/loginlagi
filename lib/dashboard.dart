@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';  // Import to use SystemNavigator
-import 'dart:io' show Platform;  // Import to check the platform
+import 'package:flutter/services.dart';  
+import 'dart:io' show Platform; 
 
 class DashboardPage extends StatelessWidget {
   @override
@@ -42,14 +42,14 @@ class DashboardPage extends StatelessWidget {
   void _exitApp(BuildContext context) {
     try {
       if (Platform.isAndroid || Platform.isIOS) {
-        // Use SystemNavigator to close the app on Android and iOS
+      
         SystemNavigator.pop();
       } else {
-        // For unsupported platforms (like web), show a dialog or a message
+       
         _showUnsupportedPlatformDialog(context);
       }
     } catch (e) {
-      // Handle exception in case Platform.isAndroid/isIOS isn't available (e.g., web)
+      
       _showUnsupportedPlatformDialog(context);
     }
   }
