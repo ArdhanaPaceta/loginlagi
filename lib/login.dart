@@ -29,12 +29,11 @@ class _LoginPageState extends State<LoginPage> {
 
   void _login() {
     setState(() {
-      //error messages
+      // Error messages
       _usernameError = null;
       _passwordError = null;
     });
 
-    // Validasi username and password
     if (_usernameController.text.isEmpty) {
       setState(() {
         _usernameError = "Please enter a username.";
@@ -75,107 +74,121 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                // App Title
-                Text(
-                  'HELLO GUYS',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blueAccent,
-                  ),
-                ),
-                SizedBox(height: 20),
-
-                // Login Title
-                Text(
-                  'LOGIN',
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    color: Colors.blue,
-                  ),
-                ),
-                SizedBox(height: 20),
-
-                // Username TextField
-                TextField(
-                  controller: _usernameController,
-                  decoration: InputDecoration(
-                    labelText: 'Username',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    errorText: _usernameError,
-                  ),
-                ),
-                SizedBox(height: 20),
-
-                // Password TextField
-                TextField(
-                  controller: _passwordController,
-                  obscureText: _obscurePassword,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscurePassword
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _obscurePassword = !_obscurePassword;
-                        });
-                      },
-                    ),
-                    errorText: _passwordError,
-                  ),
-                ),
-                SizedBox(height: 20),
-
-                // Login Button
-                ElevatedButton(
-                  onPressed: _login,
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 40.0), backgroundColor: Colors.blueAccent,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                  ),
-                  child: Text(
-                    'LOGIN',
-                    style: TextStyle(fontSize: 18.0),
-                  ),
-                ),
-
-                SizedBox(height: 20),
-
-                // Sign Up Option
-                Row(
+      body: Stack(
+        children: [
+          // Background image
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/image.png'), // Path to your background image
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SingleChildScrollView(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Don't have an account?"),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/register');
-                      },
-                      child: Text('Sign Up'),
+                  children: <Widget>[
+                    // App Title
+                    Text(
+                      'HELLO GUYS',
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white, // White text for better visibility
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    // Login Title
+                    Text(
+                      'LOGIN',
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    // Username TextField
+                    TextField(
+                      controller: _usernameController,
+                       style: TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        labelText: 'Username',
+                        labelStyle: TextStyle(color: Colors.white),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        errorText: _usernameError,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    // Password TextField
+                    TextField(
+                      controller: _passwordController,
+                      obscureText: _obscurePassword,
+                       style: TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        labelStyle: TextStyle(color: Colors.white),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscurePassword = !_obscurePassword;
+                            });
+                          },
+                        ),
+                        errorText: _passwordError,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    // Login Button
+                    ElevatedButton(
+                      onPressed: _login,
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 40.0),
+                        backgroundColor: Colors.blueAccent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                      ),
+                      child: Text(
+                        'LOGIN',
+                        style: TextStyle(fontSize: 18.0 ,color: Colors.white),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    // Sign Up Option
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Don't have an account?",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/register');
+                          },
+                          child: Text('Sign Up'),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
