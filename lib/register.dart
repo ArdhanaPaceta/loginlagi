@@ -1,3 +1,4 @@
+import 'dart:ui'; // For BackdropFilter
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -9,7 +10,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController(); 
+  final TextEditingController _emailController = TextEditingController();
   bool _obscurePassword = true;
 
   void _register() {
@@ -89,126 +90,184 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    // App Title
-                    Text(
-                      'DAFTAR DISINI',
-                      style: TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white, // Changed to white for visibility
-                      ),
-                    ),
                     SizedBox(height: 20),
 
-                    // Register Title
-                    Text(
-                      'REGISTER',
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        color: Colors.white, // Changed to white for visibility
-                      ),
-                    ),
-                    SizedBox(height: 20),
-
-                    // Email TextField
-                    TextField(
-                      controller: _emailController,
-                      style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                        labelText: 'Email',
-                        labelStyle: TextStyle(color: Colors.white), // Label color changed
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 20),
-
-                    // Username TextField
-                    TextField(
-                      controller: _usernameController,
-                       style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                        labelText: 'Username',
-                        labelStyle: TextStyle(color: Colors.white), // Label color changed
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 20),
-
-                    // Password TextField
-                    TextField(
-                      controller: _passwordController,
-                      obscureText: _obscurePassword,
-                       style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        labelStyle: TextStyle(color: Colors.white), // Label color changed
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                            color: Colors.white, // Icon color changed
+                    // Blurred and Transparent Register Box with border
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12.0),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                        child: Container(
+                          padding: EdgeInsets.all(20.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.1), // Increased transparency
+                            borderRadius: BorderRadius.circular(12.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: const Color.fromARGB(66, 255, 255, 255),
+                                blurRadius: 10,
+                                offset: Offset(0, 4),
+                              ),
+                            ],
                           ),
-                          onPressed: () {
-                            setState(() {
-                              _obscurePassword = !_obscurePassword;
-                            });
-                          },
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                'REGISTER',
+                                style: TextStyle(
+                                  fontSize: 24.0,
+                                  color: Colors.white, // Changed to white for visibility
+                                ),
+                              ),
+                              SizedBox(height: 20),
+
+                              // Email TextField
+                              TextField(
+                                controller: _emailController,
+                                style: TextStyle(color: Colors.white),
+                                decoration: InputDecoration(
+                                  labelText: 'Email',
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    borderSide: BorderSide(
+                                      color: Colors.white, // Change this to your desired color
+                                      width: 2.0, // Set the width for a bolder outline
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    borderSide: BorderSide(
+                                      color: Colors.blueAccent, // Change this for focused state
+                                      width: 2.0,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 20),
+
+                              // Username TextField
+                              TextField(
+                                controller: _usernameController,
+                                style: TextStyle(color: Colors.white),
+                                decoration: InputDecoration(
+                                  labelText: 'Username',
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    borderSide: BorderSide(
+                                      color: Colors.white,
+                                      width: 2.0,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    borderSide: BorderSide(
+                                      color: Colors.blueAccent,
+                                      width: 2.0,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 20),
+
+                              // Password TextField
+                              TextField(
+                                controller: _passwordController,
+                                obscureText: _obscurePassword,
+                                style: TextStyle(color: Colors.white),
+                                decoration: InputDecoration(
+                                  labelText: 'Password',
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    borderSide: BorderSide(
+                                      color: Colors.white,
+                                      width: 2.0,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    borderSide: BorderSide(
+                                      color: Colors.blueAccent,
+                                      width: 2.0,
+                                    ),
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                                      color: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _obscurePassword = !_obscurePassword;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 20),
+
+                              // Confirm Password TextField
+                              TextField(
+                                controller: _confirmPasswordController,
+                                obscureText: _obscurePassword,
+                                style: TextStyle(color: Colors.white),
+                                decoration: InputDecoration(
+                                  labelText: 'Confirm Password',
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    borderSide: BorderSide(
+                                      color: Colors.white,
+                                      width: 2.0,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    borderSide: BorderSide(
+                                      color: Colors.blueAccent,
+                                      width: 2.0,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 20),
+
+                              // Register Button
+                              ElevatedButton(
+                                onPressed: _register,
+                                style: ElevatedButton.styleFrom(
+                                  padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 40.0),
+                                  backgroundColor: Colors.blueAccent,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                ),
+                                child: Text(
+                                  'REGISTER',
+                                  style: TextStyle(fontSize: 18.0, color: Colors.white),
+                                ),
+                              ),
+                              SizedBox(height: 20),
+
+                              // Already have an account
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Already have an account?", style: TextStyle(color: Colors.white)),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '/login');
+                                    },
+                                    child: Text('Login'),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 20),
-
-                    // Confirm Password TextField
-                    TextField(
-                      controller: _confirmPasswordController,
-                      obscureText: _obscurePassword,
-                       style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                        labelText: 'Confirm Password',
-                        labelStyle: TextStyle(color: Colors.white), // Label color changed
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 20),
-
-                    // Register Button
-                    ElevatedButton(
-                      onPressed: _register,
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 40.0),
-                        backgroundColor: Colors.blueAccent,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                      ),
-                      child: Text(
-                        'REGISTER',
-                        style: TextStyle(fontSize: 18.0, color: Colors.white), // Button text color changed
-                      ),
-                    ),
-
-                    SizedBox(height: 20),
-
-                    // Already have an account
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Already have an account?", style: TextStyle(color: Colors.white)), // Text color changed
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/login');
-                          },
-                          child: Text('Login', style: TextStyle(color: Colors.white)), // Button text color changed
-                        ),
-                      ],
                     ),
                   ],
                 ),
